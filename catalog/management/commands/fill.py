@@ -6,7 +6,6 @@ from catalog.models import Category, Product
 
 
 class Command(BaseCommand):
-    help = 'Populate the database with initial data'
 
     @staticmethod
     def json_read_categories():
@@ -49,4 +48,4 @@ class Command(BaseCommand):
             )
 
         Product.objects.bulk_create(product_for_create)
-        self.stdout.write(self.style.SUCCESS('Successfully populated the database'))
+        self.stdout.write(self.style.SUCCESS('Успешно'))
