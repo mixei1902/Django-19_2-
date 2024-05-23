@@ -1,21 +1,41 @@
+<!-- file: templates/catalog/home.html -->
+
 {% extends 'base.html' %}
 {% load media_tags %}
 
+{% block title %}Свежий Магазин{% endblock %}
+
 {% block content %}
-<div class="container">
-    <div class="row">
-        {% for object in object_list %}
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <img class="card-img-top" src="{{ object.image_url|mymedia }}" alt="{{ object.name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ object.name }}</h5>
-                    <p class="card-text">{{ object.description|truncatechars:100 }}</p>
-                    <a href="{% url 'product_detail' object.pk %}" class="btn btn-primary">View Details</a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Свежий Магазин</h1>
+      <p class="lead text-muted">Добро пожаловать в наш магазин! Мы предлагаем только самые свежие продукты.</p>
     </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for object in object_list %}
+      <div class="col">
+        <div class="card shadow-sm">
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ object.image_url|mymedia }}" alt="{{ object.name }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ object.name }}</h5>
+            <p class="card-text">{{ object.description|truncatechars:100 }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'product_detail' object.pk %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+              </div>
+              <small class="text-body-secondary">{{ object.price }} руб.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock %}

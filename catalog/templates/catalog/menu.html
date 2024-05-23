@@ -1,10 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'home' %}">Свежий Магазин</a>
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Главная</a>
-            </li>
-        </ul>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for product in products %}
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="{{ product.image_url }}" alt="{{ product.name }}" class="bd-placeholder-img card-img-top" width="100%" height="225">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">{{ product.description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+              </div>
+              <small class="text-muted">{{ product.price }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-</nav>
+  </div>
+</div>
+{% endblock %}
