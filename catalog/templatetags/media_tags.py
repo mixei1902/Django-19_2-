@@ -1,5 +1,3 @@
-# file: catalog/templatetags/media_tags.py
-
 from django import template
 
 register = template.Library()
