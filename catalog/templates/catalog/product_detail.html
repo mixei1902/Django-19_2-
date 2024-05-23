@@ -1,0 +1,14 @@
+<!-- file: catalog/templates/catalog/product_detail.html -->
+
+{% load media_tags %}
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ object.name }}</h1>
+    <p>{{ object.description }}</p>
+    <p>Price: {{ object.price }}</p>
+    <img src="{{ object.image_url|mymedia }}" alt="{{ object.name }}">
+</div>
+{% endblock %}
