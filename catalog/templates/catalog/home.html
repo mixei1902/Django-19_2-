@@ -19,7 +19,7 @@
       {% for object in object_list %}
       <div class="col">
         <div class="card shadow-sm">
-          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ object.image_url|mymedia }}" alt="{{ object.name }}">
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ object.image|mymedia }}" alt="{{ object.name }}">
           <div class="card-body">
             <h5 class="card-title">{{ object.name }}</h5>
             <p class="card-text">{{ object.description|truncatechars:100 }}</p>
