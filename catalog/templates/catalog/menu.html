@@ -1,7 +1,18 @@
-<nav>
-    <ul>
-        <li><a href="{% url 'home' %}">Главная</a></li>
-        <li><a href="/">Категории</a></li>
-        <li><a href="{% url 'contacts' %}">Контакты</a></li>
+<nav style="background-color: #f8f9fa; border: 1px solid #e0e0e0; padding: 10px; margin-bottom: 20px;">
+    <ul style="list-style-type: none; padding: 0;">
+        <li style="display: inline; margin-right: 15px;">
+            <a href="{% url 'home' %}" style="text-decoration: none; color: #007bff;">Главная</a>
+        </li>
+        <li style="display: inline; margin-right: 15px;">
+            <a href="{% url 'contacts' %}" style="text-decoration: none; color: #007bff;">Контакты</a>
+        </li>
+    </ul>
+    <h5 style="margin-top: 20px;">Категории</h5>
+    <ul style="list-style-type: none; padding: 0;">
+        {% for category in categories %}
+        <li style="margin-bottom: 10px;">
+            <a href="{% url 'category' category.id %}" style="text-decoration: none; color: #007bff;">{{ category.name }}</a>
+        </li>
+        {% endfor %}
     </ul>
 </nav>
