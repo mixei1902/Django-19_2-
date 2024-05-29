@@ -20,10 +20,6 @@ def contact(request):
     return render(request, 'catalog/contact.html')
 
 
-# def category(request):
-#     categories = Category.objects.all()
-#     return render(request, 'catalog/category.html', {'categories': categories})
-
 def category_detail(request, category_id):
     category = get_object_or_404(Category, id=category_id)
     products = Product.objects.filter(category=category)
