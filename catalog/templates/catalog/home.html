@@ -1,5 +1,5 @@
+<!-- templates/catalog/home.html -->
 {% extends 'base.html' %}
-{% load media_tags %}
 
 {% block title %}Свежий Магазин{% endblock %}
 
@@ -13,27 +13,5 @@
   </div>
 </section>
 
-<div class="album py-5 bg-body-tertiary">
-  <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      {% for object in object_list %}
-      <div class="col">
-        <div class="card shadow-sm">
-          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ object.image|mymedia }}" alt="{{ object.name }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ object.name }}</h5>
-            <p class="card-text">{{ object.description|truncatechars:100 }}</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="{% url 'product_detail' object.pk %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-              </div>
-              <small class="text-body-secondary">{{ object.price }} руб.</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
+{% include 'catalog/product_list.html' %}
 {% endblock %}
