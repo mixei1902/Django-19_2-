@@ -11,6 +11,7 @@
             <li>
                 <a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a>
                 <p>{{ post.content|truncatewords:20 }}</p>
+                <p>Views: {{ post.views_count }}</p>
             </li>
         {% endfor %}
     </ul>
