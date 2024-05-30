@@ -1,31 +1,32 @@
-from django.shortcuts import render, get_object_or_404
-
+from django.views.generic import ListView, DetailView, TemplateView
 from .models import Product, Category
 
+class HomeView(ListView):
+    model = Product
+    template_name = 'catalog/home.html'
+    context_object_name = 'object_list'
 
-def home(request):
-    products = Product.objects.all()
-    categories = Category.objects.all()
-    context = {'object_list': products, 'categories': categories}
-    return render(request, 'catalog/home.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'object'
 
-def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {'object': product}
-    return render(request, 'catalog/product_detail.html', context)
+class ContactView(TemplateView):
+    template_name = 'catalog/contact.html'
 
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'catalog/category_detail.html'
+    context_object_name = 'category'
+    pk_url_kwarg = 'category_id'
 
-def contact(request):
-    return render(request, 'catalog/contact.html')
-
-
-def category_detail(request, category_id):
-    category = get_object_or_404(Category, id=category_id)
-    products = Product.objects.filter(category=category)
-    categories = Category.objects.all()
-    return render(request, 'catalog/category_detail.html', {
-        'category': category,
-        'products': products,
-        'categories': categories
-    })
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['products'] = Product.objects.filter(category=self.get_object())
+        context['categories'] = Category.objects.all()
+        return context
