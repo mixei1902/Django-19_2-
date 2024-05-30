@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ post.title }}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.content }}</p>
-    <p>Дата создания: {{ post.created_at }}</p>
-    <p>Просмотры: {{ post.views_count }}</p>
-    <a href="{% url 'blog_update' post.pk %}">Редактировать</a>
-    <a href="{% url 'blog_delete' post.pk %}">Удалить</a>
+    <div class="container mt-5">
+        <button class="btn btn-secondary mb-3" onclick="window.history.back();">Назад</button>
+        <h1 class="display-4">{{ post.title }}</h1>
+        {% if post.preview %}
+            <img src="{{ post.preview.url }}" class="img-fluid" alt="{{ post.title }}">
+        {% endif %}
+        <p class="lead">{{ post.content }}</p>
+        <p>Дата создания: {{ post.created_at }}</p>
+        <p>Просмотры: {{ post.views_count }}</p>
+        <a href="{% url 'blog_update' post.pk %}" class="btn btn-primary">Редактировать</a>
+        <a href="{% url 'blog_delete' post.pk %}" class="btn btn-danger">Удалить</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

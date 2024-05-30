@@ -1,19 +1,30 @@
-<!-- blog/templates/blog/blog_list.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Список постов</h1>
-    <ul>
-        {% for post in posts %}
-            <li>
-                <a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a>
-                <p>{{ post.content|truncatewords:20 }}</p>
-                <p>Views: {{ post.views_count }}</p>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container mt-5">
+        <a href="{% url 'home' %}" class="btn btn-secondary mb-3">Назад</a>
+        <h1 class="display-4">Список постов</h1>
+        <div class="list-group">
+            {% for post in posts %}
+                <a href="{% url 'blog_detail' post.pk %}" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                    <p class="mb-1">{{ post.content|truncatewords:20 }}</p>
+                    {% if post.preview %}
+                        <img src="{{ post.preview.url }}" class="img-thumbnail" alt="{{ post.title }}">
+                    {% endif %}
+                    <small>Views: {{ post.views_count }}</small>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
