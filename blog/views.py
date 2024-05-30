@@ -20,13 +20,13 @@ class BlogPostCreateView(CreateView):
     model = BlogPost
     template_name = 'blog/blog_form.html'
     fields = ['title', 'slug', 'content', 'preview', 'is_published']
-
+    success_url = reverse_lazy('blog_list')
 
 class BlogPostUpdateView(UpdateView):
     model = BlogPost
     template_name = 'blog/blog_form.html'
     fields = ['title', 'slug', 'content', 'preview', 'is_published']
-
+    success_url = reverse_lazy('blog_list')
 
 class BlogPostDeleteView(DeleteView):
     model = BlogPost
