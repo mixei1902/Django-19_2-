@@ -8,7 +8,7 @@ class BlogPost(models.Model):
     preview = models.ImageField(upload_to='blog_previews/',verbose_name ='Изображение')
     created_at = models.DateTimeField(auto_now_add=True,verbose_name ='Дата создания')
     is_published = models.BooleanField(default=False,verbose_name ='Признак публикации')
-    views_count = models.IntegerField(default=0,verbose_name ='Количество просмотров')
+    views_count = models.PositiveIntegerField(default=0,verbose_name ='Количество просмотров')
 
     def save(self, *args, **kwargs):
         if not self.slug:
