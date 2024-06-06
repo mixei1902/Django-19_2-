@@ -1,6 +1,8 @@
 from django.views.generic import ListView, DetailView, TemplateView
-from .models import Product, Category
+
 from blog.models import BlogPost
+from .models import Product, Category
+
 
 class HomeView(ListView):
     model = Product
@@ -13,13 +15,16 @@ class HomeView(ListView):
         context['blog_posts'] = BlogPost.objects.filter(is_published=True)
         return context
 
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
     context_object_name = 'object'
 
+
 class ContactView(TemplateView):
     template_name = 'catalog/contact.html'
+
 
 class CategoryDetailView(DetailView):
     model = Category
