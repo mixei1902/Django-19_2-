@@ -7,5 +7,5 @@
         {% csrf_token %}
         <button type="submit">Удалить</button>
     </form>
-    <a href="{#}" class="btn btn-outline-secondary">Назад к списку</a>
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">Назад к списку</a>
 {% endblock %}
