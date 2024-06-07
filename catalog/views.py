@@ -41,7 +41,14 @@ class ProductDeleteView(DeleteView):
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
-    context_object_name = 'object'
+    context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = self.get_object()
+        current_version = product.versions.filter(is_current=True).first()
+        context['current_version'] = current_version
+        return context
 
 
 class ContactView(TemplateView):

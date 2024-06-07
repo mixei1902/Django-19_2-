@@ -5,19 +5,24 @@
 
 {% block content %}
 <div class="container py-5">
-  <div class="row">
-    <div class="col-md-6">
-      <img class="img-fluid" src="{{ object.image|mymedia }}" alt="{{ object.name }}">
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-fluid" src="{{ product.image|mymedia }}" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-6">
+            <h1 class="display-5">{{ product.name }}</h1>
+            <p class="lead">{{ product.description }}</p>
+            <p class="lead">{{ product.price }} руб.</p>
+            <p class="lead">{{ product.category }}</p>
+            <p class="lead">{{ product.created_at }}</p>
+            <p class="lead">{{ product.update_at}}</p>
+            {% if current_version %}
+            <p class="card-text"><strong>Актуальная карточка товара</strong> {{ current_version.version_name }} ({{ current_version.version_number }})</p>
+            {% else %}
+            <p class="card-text"><strong>Не актуальная карточка товара</strong></p>
+            {% endif %}
+            <a href="{% url 'home' %}" class="btn btn-lg btn-outline-secondary">Назад к списку</a>
+        </div>
     </div>
-    <div class="col-md-6">
-      <h1 class="display-5">{{ object.name }}</h1>
-      <p class="lead">{{ object.description }}</p>
-      <p class="lead">{{ object.price }} руб.</p>
-      <p class="lead">{{ object.category }}</p>
-      <p class="lead">{{ object.created_at }}</p>
-      <p class="lead">{{ object.update_at}}</p>
-      <a href="{% url 'home' %}" class="btn btn-lg btn-outline-secondary">Назад к списку</a>
-    </div>
-  </div>
 </div>
 {% endblock %}

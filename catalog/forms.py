@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Product
+from .models import Product, Version
 
 
 class ProductForm(forms.ModelForm):
@@ -25,3 +25,9 @@ class ProductForm(forms.ModelForm):
             if word in description:
                 raise forms.ValidationError(f"Описание содержит запрещенное слово: {word}")
         return description
+
+
+class VersionForm(forms.ModelForm):
+    class Meta:
+        model = Version
+        fields = ['product', 'version_number', 'version_name', 'is_current']
