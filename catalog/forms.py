@@ -6,7 +6,7 @@ from .models import Product
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description']
+        fields = '__all__'
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
