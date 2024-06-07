@@ -2,8 +2,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
 from blog.models import BlogPost
-from .forms import ProductForm
-from .models import Product, Category
+from .forms import ProductForm, VersionForm
+from .models import Product, Category, Version
 
 
 class HomeView(ListView):
@@ -66,3 +66,17 @@ class CategoryDetailView(DetailView):
         context['products'] = Product.objects.filter(category=self.get_object())
         context['categories'] = Category.objects.all()
         return context
+
+
+class VersionCreateView(CreateView):
+    model = Version
+    form_class = VersionForm
+    template_name = 'catalog/version_form.html'
+    success_url = reverse_lazy('home')
+
+
+class VersionUpdateView(UpdateView):
+    model = Version
+    form_class = VersionForm
+    template_name = 'catalog/version_form.html'
+    success_url = reverse_lazy('home')
