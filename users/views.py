@@ -1,9 +1,13 @@
+import random
 import secrets
+import string
 
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.views import LoginView  # Убедитесь, что это импортировано
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, View
 
 from users.forms import UserRegisterForm
 from users.models import User
@@ -39,6 +43,10 @@ def email_verification(request, token):
     user.token = ''
     user.save()
     return redirect(reverse('users:login'))
+
+
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
 
 
 class PasswordResetView(View):
