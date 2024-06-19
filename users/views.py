@@ -3,7 +3,7 @@ import secrets
 import string
 
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.views import LoginView  # Убедитесь, что это импортировано
+from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
@@ -16,6 +16,7 @@ from users.models import User
 class UserCreateView(CreateView):
     model = User
     form_class = UserRegisterForm
+    template_name = 'users/register.html'
     success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
@@ -46,12 +47,12 @@ def email_verification(request, token):
 
 
 class CustomLoginView(LoginView):
-    template_name = 'registration/login.html'
+    template_name = 'users/login.html'
 
 
 class PasswordResetView(View):
     def get(self, request):
-        return render(request, 'registration/password_reset.html')
+        return render(request, 'users/password_reset.html')
 
     def post(self, request):
         email = request.POST.get('email')
