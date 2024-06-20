@@ -20,7 +20,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/', verbose_name="изображение", null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name="Категория продукта")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена",null=True, blank=True)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products',default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
