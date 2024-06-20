@@ -31,7 +31,7 @@ class UserCreateView(CreateView):
         send_mail(
             subject='Подтверждение почты',
             message=f'Привет, перейдите по ссылке для подтверждения почты: {verification_link}',
-            from_email='your_email@example.com',
+            from_email='mixei1902@yandex.ru',
             recipient_list=[user.email],
             fail_silently=False,
         )
@@ -64,7 +64,7 @@ class PasswordResetView(View):
             send_mail(
                 'Восстановление пароля',
                 f'Ваш новый пароль: {new_password}',
-                'your_email@example.com',
+                'mixei1902@yandex.ru',
                 [user.email],
                 fail_silently=False,
             )
