@@ -17,8 +17,15 @@
             </li>
         </ul>
         <div style="float: right;">
-            <a href="{% url 'users:login' %}" style="text-decoration: none; color: #007bff; margin-right: 15px;">Войти</a>
-            <a href="{% url 'users:register' %}" style="text-decoration: none; color: #007bff;">Регистрация</a>
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'users:logout' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none; color: #007bff; cursor: pointer; text-decoration: none;">Выйти</button>
+                </form>
+            {% else %}
+                <a href="{% url 'users:login' %}" style="text-decoration: none; color: #007bff; margin-right: 15px;">Войти</a>
+                <a href="{% url 'users:register' %}" style="text-decoration: none; color: #007bff;">Регистрация</a>
+            {% endif %}
         </div>
         <div style="clear: both;"></div>
         <h5 style="margin-top: 20px;">Категории</h5>
