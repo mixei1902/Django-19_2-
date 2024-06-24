@@ -15,6 +15,11 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    STATUS_CHOICES = [
+        ('draft', 'Draft'),
+        ('published', 'Published'),
+        ('unpublished', 'Unpublished'),
+    ]
     name = models.CharField(max_length=50, verbose_name="Название продукта")
     description = models.TextField(verbose_name="Описание ппродукта")
     image = models.ImageField(upload_to='products/', verbose_name="изображение", null=True, blank=True)

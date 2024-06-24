@@ -20,6 +20,14 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description')
     inlines = [VersionInline]
 
+    def create_moderator_group():
+        product_content_type = ContentType.objects.get_for_model(Product)
+        permissions = Permission.objects.filter(content_type=product_content_type)
+
+        moderator_group, created = Group.objects.get_or_create(name='Moderators')
+        for permission in permissions:
+            moderator_group.permissions.add(permission)
+
 
 @admin.register(Version)
 class VersionAdmin(admin.ModelAdmin):

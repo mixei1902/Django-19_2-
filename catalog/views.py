@@ -36,6 +36,10 @@ class ProductUpdateView(UpdateView):
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('home')
 
+    def get_queryset(self):
+        if self.request.user.has_perm('catalog.can_change_any_product_description'):
+            return self.model.objects.all()
+        return self.model.objects.filter(owner=self.request.user)
 
 class ProductDeleteView(DeleteView):
     model = Product
