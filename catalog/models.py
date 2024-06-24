@@ -18,9 +18,10 @@ class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название продукта")
     description = models.TextField(verbose_name="Описание ппродукта")
     image = models.ImageField(upload_to='products/', verbose_name="изображение", null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name="Категория продукта")
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена",null=True, blank=True)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products',default=1)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products',
+                                 verbose_name="Категория продукта")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена", null=True, blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='products', default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -30,6 +31,11 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+        permissions = [
+            ("can_unpublish_product", "Can unpublish product"),
+            ("can_change_any_product_description", "Can change any product description"),
+            ("can_change_any_product_category", "Can change any product category"),
+        ]
 
 
 class Version(models.Model):
