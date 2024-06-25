@@ -23,16 +23,10 @@
             <p class="card-text"><strong>Не актуальная карточка товара</strong></p>
             {% endif %}
             <a href="{% url 'home' %}" class="btn btn-lg btn-outline-secondary">Назад к списку</a>
-
             {% if perms.catalog.can_change_any_product_description %}
-                <a href="{% url 'product_edit' product.pk %}" class="btn btn-lg btn-primary">Редактировать</a>
+                <a href="{% url 'product_update' product.pk %}" class="btn btn-lg btn-primary">Редактировать</a>
             {% endif %}
-            {% if perms.catalog.can_unpublish_product %}
-                <form method="post" action="{% url 'product_unpublish' product.pk %}" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-lg btn-warning">Отменить публикацию</button>
-                </form>
-            {% endif %}
+
         </div>
     </div>
 </div>
