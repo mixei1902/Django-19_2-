@@ -15,10 +15,10 @@
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
                 <a href="{% url 'product_detail' product.pk %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                {% if product.owner == request.user or request.user.has_perm('catalog.can_change_any_product_description') %}
+                {% if product.owner == request.user or request.user|has_perm:"catalog.can_change_any_product_description" %}
                   <a href="{% url 'product_update' product.pk %}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
                 {% endif %}
-                {% if product.owner == request.user or request.user.has_perm('catalog.can_delete_any_product') %}
+                {% if product.owner == request.user or request.user|has_perm:'catalog.can_delete_any_product' %}
                   <a href="{% url 'product_delete' product.pk %}" class="btn btn-sm btn-outline-secondary">Удалить</a>
                 {% endif %}
               </div>

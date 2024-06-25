@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.models import Permission, Group
+from django.contrib.contenttypes.models import ContentType
 
 from .models import Product, Category, Version
 

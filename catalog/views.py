@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 from blog.models import BlogPost
 from .forms import ProductForm, VersionForm
 from .models import Product, Category, Version
+from .services import get_cached_products, get_cached_categories
 
 
 class HomeView(ListView):
@@ -19,7 +20,7 @@ class HomeView(ListView):
         return context
 
 
-class ProductCreateView(LoginRequiredMixin,CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -40,6 +41,7 @@ class ProductUpdateView(UpdateView):
         if self.request.user.has_perm('catalog.can_change_any_product_description'):
             return self.model.objects.all()
         return self.model.objects.filter(owner=self.request.user)
+
 
 class ProductDeleteView(DeleteView):
     model = Product
@@ -72,9 +74,15 @@ class CategoryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.filter(category=self.get_object())
-        context['categories'] = Category.objects.all()
+        context['products'] = get_cached_products().filter(category=self.get_object())
+        context['categories'] = get_cached_categories()
         return context
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'catalog/category_list.html'
+    context_object_name = 'categories'
 
 
 class VersionCreateView(CreateView):
